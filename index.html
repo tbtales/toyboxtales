@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ToyBox Tales — Toys &amp; Cards</title>
-<link rel="icon" type="image/ico" href="images/ico.ico">
+<link rel="icon" type="image/ico" href="https://raw.githubusercontent.com/tbtales/toyboxtales/main/images/ico.ico">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet">
 <style>
   :root {
@@ -197,6 +197,21 @@
   .adm-meta{font-size:.78rem;color:var(--slate);}
   .del-btn{background:#fee2e2;border:none;color:var(--coral);width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0;transition:all .2s;}
   .del-btn:hover{background:var(--coral);color:#fff;}
+  .edit-btn{background:#e8f4e8;border:none;color:var(--forest);width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0;transition:all .2s;margin-right:.35rem;}
+  .edit-btn:hover{background:var(--forest);color:#fff;}
+  .adm-prod-actions{display:flex;align-items:center;gap:0;}
+
+  /* EDIT MODAL */
+  .edit-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600;align-items:center;justify-content:center;padding:1rem;}
+  .edit-modal-overlay.open{display:flex;}
+  .edit-modal{background:var(--warm-white);border-radius:18px;padding:2rem;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:fadeIn .25s ease;}
+  .edit-modal h2{font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:1.25rem;color:var(--midnight);}
+  .edit-modal-footer{display:flex;gap:.75rem;margin-top:1.25rem;}
+  .edit-save-btn{flex:1;background:var(--forest);color:#fff;border:none;padding:.75rem;border-radius:10px;font-weight:700;font-size:.95rem;cursor:pointer;transition:background .2s;}
+  .edit-save-btn:hover{background:#1e3d2a;}
+  .edit-cancel-btn{background:var(--soft-gray);color:var(--slate);border:none;padding:.75rem 1.25rem;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;transition:background .2s;}
+  .edit-cancel-btn:hover{background:var(--border);}
+  .field-err{border-color:var(--coral)!important;}
 
   .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--midnight);color:#fff;padding:.8rem 1.5rem;border-radius:100px;font-weight:600;font-size:.9rem;z-index:999;transition:transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;pointer-events:none;}
   .toast.show{transform:translateX(-50%) translateY(0);}
@@ -324,9 +339,9 @@
 <div class="toast" id="toast">✅ Product saved! Remember to Export &amp; upload to GitHub.</div>
 
 <!-- ══ SHOP ══ -->
-<div class="page active" id="page-shop">
+<div class="page" id="page-shop">
   <div class="hero">
-    <div class="hero-toys" id="heroToys"><span class="toy-float" style="left: 68.53%; animation-duration: 13.7736s; animation-delay: -10.7635s; font-size: 1.99336rem;">🚗</span><span class="toy-float" style="left: 90.0159%; animation-duration: 14.6728s; animation-delay: -4.6923s; font-size: 2.50219rem;">🧸</span><span class="toy-float" style="left: 22.1033%; animation-duration: 17.4109s; animation-delay: -9.74664s; font-size: 1.3406rem;">🎮</span><span class="toy-float" style="left: 69.3027%; animation-duration: 17.9726s; animation-delay: -15.273s; font-size: 2.43842rem;">🃏</span><span class="toy-float" style="left: 27.652%; animation-duration: 17.4838s; animation-delay: -17.4693s; font-size: 2.27465rem;">🚂</span><span class="toy-float" style="left: 10.2861%; animation-duration: 8.00878s; animation-delay: -7.16852s; font-size: 1.92689rem;">🎲</span><span class="toy-float" style="left: 84.9239%; animation-duration: 18.2206s; animation-delay: -12.6181s; font-size: 2.73141rem;">🪀</span><span class="toy-float" style="left: 48.3051%; animation-duration: 13.3071s; animation-delay: -10.5649s; font-size: 2.16892rem;">🧩</span><span class="toy-float" style="left: 46.4485%; animation-duration: 18.0528s; animation-delay: -14.4856s; font-size: 1.39156rem;">🚀</span><span class="toy-float" style="left: 86.3319%; animation-duration: 11.2628s; animation-delay: -8.93796s; font-size: 2.63204rem;">⭐</span><span class="toy-float" style="left: 69.5766%; animation-duration: 16.9273s; animation-delay: -16.298s; font-size: 1.96649rem;">🎯</span><span class="toy-float" style="left: 41.1149%; animation-duration: 8.10217s; animation-delay: -5.87217s; font-size: 2.16741rem;">🏎️</span><span class="toy-float" style="left: 39.2112%; animation-duration: 19.6675s; animation-delay: -9.58867s; font-size: 2.66276rem;">🤖</span><span class="toy-float" style="left: 63.6241%; animation-duration: 15.6306s; animation-delay: -1.8844s; font-size: 2.47387rem;">🦖</span><span class="toy-float" style="left: 90.0676%; animation-duration: 15.155s; animation-delay: -6.7172s; font-size: 1.64265rem;">🚗</span><span class="toy-float" style="left: 85.5931%; animation-duration: 16.3125s; animation-delay: -14.6049s; font-size: 2.28843rem;">🧸</span><span class="toy-float" style="left: 90.8104%; animation-duration: 13.2509s; animation-delay: -10.4147s; font-size: 2.14556rem;">🎮</span><span class="toy-float" style="left: 73.5055%; animation-duration: 17.5939s; animation-delay: -17.0168s; font-size: 1.21718rem;">🃏</span></div>
+    <div class="hero-toys" id="heroToys"><span class="toy-float" style="left: 68.53%; animation-duration: 13.7736s; animation-delay: -10.7635s; font-size: 1.99336rem;">🚗</span><span class="toy-float" style="left: 90.0159%; animation-duration: 14.6728s; animation-delay: -4.6923s; font-size: 2.50219rem;">🧸</span><span class="toy-float" style="left: 22.1033%; animation-duration: 17.4109s; animation-delay: -9.74664s; font-size: 1.3406rem;">🎮</span><span class="toy-float" style="left: 69.3027%; animation-duration: 17.9726s; animation-delay: -15.273s; font-size: 2.43842rem;">🃏</span><span class="toy-float" style="left: 27.652%; animation-duration: 17.4838s; animation-delay: -17.4693s; font-size: 2.27465rem;">🚂</span><span class="toy-float" style="left: 10.2861%; animation-duration: 8.00878s; animation-delay: -7.16852s; font-size: 1.92689rem;">🎲</span><span class="toy-float" style="left: 84.9239%; animation-duration: 18.2206s; animation-delay: -12.6181s; font-size: 2.73141rem;">🪀</span><span class="toy-float" style="left: 48.3051%; animation-duration: 13.3071s; animation-delay: -10.5649s; font-size: 2.16892rem;">🧩</span><span class="toy-float" style="left: 46.4485%; animation-duration: 18.0528s; animation-delay: -14.4856s; font-size: 1.39156rem;">🚀</span><span class="toy-float" style="left: 86.3319%; animation-duration: 11.2628s; animation-delay: -8.93796s; font-size: 2.63204rem;">⭐</span><span class="toy-float" style="left: 69.5766%; animation-duration: 16.9273s; animation-delay: -16.298s; font-size: 1.96649rem;">🎯</span><span class="toy-float" style="left: 41.1149%; animation-duration: 8.10217s; animation-delay: -5.87217s; font-size: 2.16741rem;">🏎️</span><span class="toy-float" style="left: 39.2112%; animation-duration: 19.6675s; animation-delay: -9.58867s; font-size: 2.66276rem;">🤖</span><span class="toy-float" style="left: 63.6241%; animation-duration: 15.6306s; animation-delay: -1.8844s; font-size: 2.47387rem;">🦖</span><span class="toy-float" style="left: 90.0676%; animation-duration: 15.155s; animation-delay: -6.7172s; font-size: 1.64265rem;">🚗</span><span class="toy-float" style="left: 85.5931%; animation-duration: 16.3125s; animation-delay: -14.6049s; font-size: 2.28843rem;">🧸</span><span class="toy-float" style="left: 90.8104%; animation-duration: 13.2509s; animation-delay: -10.4147s; font-size: 2.14556rem;">🎮</span><span class="toy-float" style="left: 73.5055%; animation-duration: 17.5939s; animation-delay: -17.0168s; font-size: 1.21718rem;">🃏</span><span class="toy-float" style="left: 71.0897%; animation-duration: 15.6162s; animation-delay: -3.06164s; font-size: 2.79646rem;">🚗</span><span class="toy-float" style="left: 33.7073%; animation-duration: 10.4694s; animation-delay: -18.8477s; font-size: 1.89476rem;">🧸</span><span class="toy-float" style="left: 41.9456%; animation-duration: 9.40262s; animation-delay: -6.14654s; font-size: 2.81629rem;">🎮</span><span class="toy-float" style="left: 51.339%; animation-duration: 18.3358s; animation-delay: -9.52626s; font-size: 1.34453rem;">🃏</span><span class="toy-float" style="left: 52.9195%; animation-duration: 19.4586s; animation-delay: -15.9563s; font-size: 1.99589rem;">🚂</span><span class="toy-float" style="left: 13.1652%; animation-duration: 18.1754s; animation-delay: -2.24043s; font-size: 2.01984rem;">🎲</span><span class="toy-float" style="left: 76.5048%; animation-duration: 20.307s; animation-delay: -4.85879s; font-size: 1.6723rem;">🪀</span><span class="toy-float" style="left: 22.3204%; animation-duration: 14.3786s; animation-delay: -11.1462s; font-size: 1.81024rem;">🧩</span><span class="toy-float" style="left: 26.9847%; animation-duration: 13.709s; animation-delay: -13.6705s; font-size: 2.56076rem;">🚀</span><span class="toy-float" style="left: 97.7341%; animation-duration: 11.8774s; animation-delay: -19.8104s; font-size: 2.43615rem;">⭐</span><span class="toy-float" style="left: 45.6742%; animation-duration: 12.0701s; animation-delay: -4.19454s; font-size: 2.7715rem;">🎯</span><span class="toy-float" style="left: 42.3529%; animation-duration: 8.72293s; animation-delay: -17.0446s; font-size: 2.0118rem;">🏎️</span><span class="toy-float" style="left: 91.6195%; animation-duration: 16.2079s; animation-delay: -15.4462s; font-size: 2.20434rem;">🤖</span><span class="toy-float" style="left: 99.4876%; animation-duration: 16.1118s; animation-delay: -0.115684s; font-size: 2.85368rem;">🦖</span><span class="toy-float" style="left: 40.7573%; animation-duration: 11.1459s; animation-delay: -3.54234s; font-size: 1.61232rem;">🚗</span><span class="toy-float" style="left: 5.99732%; animation-duration: 11.3807s; animation-delay: -2.693s; font-size: 2.94464rem;">🧸</span><span class="toy-float" style="left: 35.8972%; animation-duration: 9.82311s; animation-delay: -1.30815s; font-size: 1.22039rem;">🎮</span><span class="toy-float" style="left: 65.3457%; animation-duration: 8.43465s; animation-delay: -10.1606s; font-size: 1.44714rem;">🃏</span></div>
     <div class="hero-tag">✨ New Arrivals Every Week</div>
     <h1>Welcome to <em>ToyBox Tales</em></h1>
     <p>Your one-stop shop for toys, trading cards, and timeless fun!
@@ -345,7 +360,7 @@
     </div>
     <div class="products-grid" id="productsGrid">
     <div class="product-card">
-      <div class="p-carousel" id="pc-13"><div class="c-track" id="ct-13"><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697792696_122174965628892861_7221712593192722625_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=106&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEYc--QMj9MnrzJLlNLbrFFBJkOA2Ifi6UEmQ4DYh-LpelYH-gIlMIJbOgT6AMrU0mIjBjh9qDzu4X6FipwqTOw&amp;_nc_ohc=q71V5Ox65G4Q7kNvwGU5RT9&amp;_nc_oc=AdqQs-2kHt4vYgJKOxiR_XjloSlG66dWzlKbt7zDjOppvF5H4O8uFSzsY2LUoz9oU_I&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=8XQUCSoohVFTrgr1B9CtxQ&amp;_nc_ss=7b2a8&amp;oh=00_Af42WvgqZqDOMpSuotuAW2-tCiriXN3XDr7UcECkGlThPw&amp;oe=6A0A8150" alt="S75 One Piece Hyper Battle" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(13,0)"></div><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/689008337_122174965640892861_3219200990069302582_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeHTUwKJsjxu3CGnudVgNUg5cMNVP4wztZFww1U_jDO1kVadZEF_oG1C4j4N-Xm4cDWVPdbR5-ZVGwFV63y_qE88&amp;_nc_ohc=liD568LWRYUQ7kNvwEi4eU1&amp;_nc_oc=AdpzHUYDDdP5oCVJlsim2niGzl_-DVQ_tvewxDmMHRQKmVxDEBoQTu4qMDf0M2STRO8&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=WubCx2ZAEwR9pT3hwiuRYg&amp;_nc_ss=7b2a8&amp;oh=00_Af6HT28_xBMn4edT_IC8jGlPKmRgDYR0gpXxg_-FScW9Iw&amp;oe=6A0A5DEA" alt="S75 One Piece Hyper Battle" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(13,1)"></div><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/697793060_122174965658892861_3778223358346623728_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=108&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEKD2_8lIG0iauEWR82KNZSbnb6kL0t5kludvqQvS3mSZSuzoR8ZBtltX0LEycsGAr24E7iNhaFJhvO4KnxCPR0&amp;_nc_ohc=JvFvmNS_dQwQ7kNvwF9U4Sm&amp;_nc_oc=Adpgzy2Wni8_917H2fWyTmxAxbgsjA8vM98r31QamWOuGRe-f7VPzpjENpu5PrA4hjg&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=8l9E1X5H6enYG32lwHgn-Q&amp;_nc_ss=7b2a8&amp;oh=00_Af6LpJSzpAQuJ2XadY2jLi1NE97PIMYbdYlGFHJYO7KkVQ&amp;oe=6A0A77BA" alt="S75 One Piece Hyper Battle" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(13,2)"></div></div><div class="p-badge">HOT</div> <button class="c-btn prev" onclick="prevS(13)">‹</button><button class="c-btn next" onclick="nextS(13)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(13,0)"></button><button class="c-dot" onclick="gotoSlide(13,1)"></button><button class="c-dot" onclick="gotoSlide(13,2)"></button></div></div>
+      <div class="p-carousel" id="pc-13"><div class="c-track" id="ct-13"><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697792696_122174965628892861_7221712593192722625_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=106&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEYc--QMj9MnrzJLlNLbrFFBJkOA2Ifi6UEmQ4DYh-LpelYH-gIlMIJbOgT6AMrU0mIjBjh9qDzu4X6FipwqTOw&amp;_nc_ohc=q71V5Ox65G4Q7kNvwGU5RT9&amp;_nc_oc=AdqQs-2kHt4vYgJKOxiR_XjloSlG66dWzlKbt7zDjOppvF5H4O8uFSzsY2LUoz9oU_I&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=8XQUCSoohVFTrgr1B9CtxQ&amp;_nc_ss=7b2a8&amp;oh=00_Af42WvgqZqDOMpSuotuAW2-tCiriXN3XDr7UcECkGlThPw&amp;oe=6A0A8150" alt="S75 One Piece Hyper Battle" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(13,0)" style="opacity: 0.2;"></div><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/689008337_122174965640892861_3219200990069302582_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeHTUwKJsjxu3CGnudVgNUg5cMNVP4wztZFww1U_jDO1kVadZEF_oG1C4j4N-Xm4cDWVPdbR5-ZVGwFV63y_qE88&amp;_nc_ohc=liD568LWRYUQ7kNvwEi4eU1&amp;_nc_oc=AdpzHUYDDdP5oCVJlsim2niGzl_-DVQ_tvewxDmMHRQKmVxDEBoQTu4qMDf0M2STRO8&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=WubCx2ZAEwR9pT3hwiuRYg&amp;_nc_ss=7b2a8&amp;oh=00_Af6HT28_xBMn4edT_IC8jGlPKmRgDYR0gpXxg_-FScW9Iw&amp;oe=6A0A5DEA" alt="S75 One Piece Hyper Battle" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(13,1)" style="opacity: 0.2;"></div><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/697793060_122174965658892861_3778223358346623728_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=108&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEKD2_8lIG0iauEWR82KNZSbnb6kL0t5kludvqQvS3mSZSuzoR8ZBtltX0LEycsGAr24E7iNhaFJhvO4KnxCPR0&amp;_nc_ohc=JvFvmNS_dQwQ7kNvwF9U4Sm&amp;_nc_oc=Adpgzy2Wni8_917H2fWyTmxAxbgsjA8vM98r31QamWOuGRe-f7VPzpjENpu5PrA4hjg&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=8l9E1X5H6enYG32lwHgn-Q&amp;_nc_ss=7b2a8&amp;oh=00_Af6LpJSzpAQuJ2XadY2jLi1NE97PIMYbdYlGFHJYO7KkVQ&amp;oe=6A0A77BA" alt="S75 One Piece Hyper Battle" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(13,2)" style="opacity: 0.2;"></div></div><div class="p-badge">HOT</div> <button class="c-btn prev" onclick="prevS(13)">‹</button><button class="c-btn next" onclick="nextS(13)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(13,0)"></button><button class="c-dot" onclick="gotoSlide(13,1)"></button><button class="c-dot" onclick="gotoSlide(13,2)"></button></div></div>
       <div class="p-info">
         <div class="p-cat">cards</div>
         <div class="p-name">S75 One Piece Hyper Battle</div>
@@ -357,7 +372,7 @@
       </div>
     </div>
     <div class="product-card">
-      <div class="p-carousel" id="pc-14"><div class="c-track" id="ct-14"><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/689010219_122174965322892861_3828937208415816759_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeG8k853voHLp-HOmt0kPPWjMY8EpsYwH8kxjwSmxjAfyUJxc-O-MjFLTmXfycbLcT8u5sHapcxuK1ZG1mY3jDzq&amp;_nc_ohc=19067rTnCr0Q7kNvwGfr5YU&amp;_nc_oc=Adp_BNj5mmUG_fQ4h447JrpQaFupE0K3Kttsd5-yyPvrN7AQVxXBWT34Pzsykdh63gg&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=0fz_ImXT_rfQo0cxwcip4A&amp;_nc_ss=7b2a8&amp;oh=00_Af7rsekM0bYrkM99n53GwaJ9A92qQ1EppaWCVS5gti83pw&amp;oe=6A0A87FD" alt="One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(14,0)"></div><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/689014462_122174965328892861_1453299139499683041_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeG5Pllv10eTguhFlXnuGVWQ5oWT5gzwe6_mhZPmDPB7r5V2_TzwxzrfO5KFfA3K47gXcqGbtpTMXpsIidrQy0E3&amp;_nc_ohc=ykxTXeoLXrcQ7kNvwHXGB83&amp;_nc_oc=AdqRHN_FXgOixJRCQbBjvCQwb_CEKPcyX35Z7Fy0fMLjNXRPmPIsqklzxE02UgCAPuM&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=5biNt00P-OWv3wzME7TSlw&amp;_nc_ss=7b2a8&amp;oh=00_Af73GsHHxAXewr5-SAU1R3FElumo9sKcdlN13oTRU8Io7A&amp;oe=6A0A5AAC" alt="One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(14,1)"></div><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/689012596_122174965364892861_5363682779913066797_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=101&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeFPCAKSF3P_iJetOv1OVPjc8goxFOKlUc7yCjEU4qVRzlTyenzoCJmIzK3Cn1_W3Mgnnuseg41L69NttFxV5Gr5&amp;_nc_ohc=i3SOu5nV4uwQ7kNvwFq0YlE&amp;_nc_oc=AdqMWh9w4D7UTW7krSMVI4TM5NsDGt-wTDu7k-1gIOnhZCLZF5Nq0i9g_ywvyG3uUgQ&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=02mts17ZSJiVFwwErHoHAA&amp;_nc_ss=7b2a8&amp;oh=00_Af4Kb096MUN_QYreFDBMWtPs_O8pqt-WwgHPG9IYedwM1g&amp;oe=6A0A70FA" alt="One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(14,2)"></div></div><div class="p-badge">HIDDEN RARE</div> <button class="c-btn prev" onclick="prevS(14)">‹</button><button class="c-btn next" onclick="nextS(14)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(14,0)"></button><button class="c-dot" onclick="gotoSlide(14,1)"></button><button class="c-dot" onclick="gotoSlide(14,2)"></button></div></div>
+      <div class="p-carousel" id="pc-14"><div class="c-track" id="ct-14"><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/689010219_122174965322892861_3828937208415816759_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeG8k853voHLp-HOmt0kPPWjMY8EpsYwH8kxjwSmxjAfyUJxc-O-MjFLTmXfycbLcT8u5sHapcxuK1ZG1mY3jDzq&amp;_nc_ohc=19067rTnCr0Q7kNvwGfr5YU&amp;_nc_oc=Adp_BNj5mmUG_fQ4h447JrpQaFupE0K3Kttsd5-yyPvrN7AQVxXBWT34Pzsykdh63gg&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=0fz_ImXT_rfQo0cxwcip4A&amp;_nc_ss=7b2a8&amp;oh=00_Af7rsekM0bYrkM99n53GwaJ9A92qQ1EppaWCVS5gti83pw&amp;oe=6A0A87FD" alt="One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(14,0)" style="opacity: 0.2;"></div><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/689014462_122174965328892861_1453299139499683041_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeG5Pllv10eTguhFlXnuGVWQ5oWT5gzwe6_mhZPmDPB7r5V2_TzwxzrfO5KFfA3K47gXcqGbtpTMXpsIidrQy0E3&amp;_nc_ohc=ykxTXeoLXrcQ7kNvwHXGB83&amp;_nc_oc=AdqRHN_FXgOixJRCQbBjvCQwb_CEKPcyX35Z7Fy0fMLjNXRPmPIsqklzxE02UgCAPuM&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=5biNt00P-OWv3wzME7TSlw&amp;_nc_ss=7b2a8&amp;oh=00_Af73GsHHxAXewr5-SAU1R3FElumo9sKcdlN13oTRU8Io7A&amp;oe=6A0A5AAC" alt="One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(14,1)" style="opacity: 0.2;"></div><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/689012596_122174965364892861_5363682779913066797_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=101&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeFPCAKSF3P_iJetOv1OVPjc8goxFOKlUc7yCjEU4qVRzlTyenzoCJmIzK3Cn1_W3Mgnnuseg41L69NttFxV5Gr5&amp;_nc_ohc=i3SOu5nV4uwQ7kNvwFq0YlE&amp;_nc_oc=AdqMWh9w4D7UTW7krSMVI4TM5NsDGt-wTDu7k-1gIOnhZCLZF5Nq0i9g_ywvyG3uUgQ&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=02mts17ZSJiVFwwErHoHAA&amp;_nc_ss=7b2a8&amp;oh=00_Af4Kb096MUN_QYreFDBMWtPs_O8pqt-WwgHPG9IYedwM1g&amp;oe=6A0A70FA" alt="One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(14,2)" style="opacity: 0.2;"></div></div><div class="p-badge">HIDDEN RARE</div> <button class="c-btn prev" onclick="prevS(14)">‹</button><button class="c-btn next" onclick="nextS(14)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(14,0)"></button><button class="c-dot" onclick="gotoSlide(14,1)"></button><button class="c-dot" onclick="gotoSlide(14,2)"></button></div></div>
       <div class="p-info">
         <div class="p-cat">cards</div>
         <div class="p-name">One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001</div>
@@ -369,7 +384,7 @@
       </div>
     </div>
     <div class="product-card">
-      <div class="p-carousel" id="pc-15"><div class="c-track" id="ct-15"><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/700092163_122174965706892861_3885872268741139448_n.jpg?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEEL_MfC_JrpIcFxqu_CTCY9eFMSrqoeBj14UxKuqh4GI-uWYBmMjnLS5WUrzHNyNTC3gGGjtYrj1HzdkdAeNi5&amp;_nc_ohc=EnAYRbkIFUMQ7kNvwHQLQ0q&amp;_nc_oc=AdoVjSzMQXC8lhimNE5sxGojoKQh7XZMjp8DIHLbggRrOh1KBdm3s8VMivoevI1m2tM&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=ZL7revhdkq_GbW05iPq4nQ&amp;_nc_ss=7b2a8&amp;oh=00_Af5wLq1BY-v5Xy4CsBqLDXQuNopJvczZm9x2IIJ6GtiV2g&amp;oe=6A0A75E5" alt="2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(15,0)"></div><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/696802558_122174965754892861_5511697258992019484_n.jpg?_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeENYR9FRZObkSIMQhw8fQSVp404dmmAD0ynjTh2aYAPTNOeMhxNov7SHkU-unMgEPKbdv-yq4mtQiuwm8yefgEu&amp;_nc_ohc=VyV57eX6jE8Q7kNvwEDo6mZ&amp;_nc_oc=Adpz_jlol_4XUVXkT8rkQ4DXi0_s8EVDWPhBUGBSjniV5jeT8QjXOpVg_qB1VJsmOTs&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=p0lFU3Z7EDVTpxzinBX_Yw&amp;_nc_ss=7b2a8&amp;oh=00_Af5kt3T9y7Tc8mwJrNM94lGKIJZJDXlzn5irGs4kYZYpLg&amp;oe=6A0A69E3" alt="2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(15,1)"></div><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/698939369_122174965844892861_7256590256714322171_n.jpg?_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeGXXTiyJFF6px7-vBy8kJnSJEQUbVakILMkRBRtVqQgs719HvouQdw4brQcPuPFgfYM9hFdggoN6JKhv81cXADu&amp;_nc_ohc=EmhfuMIIwjsQ7kNvwHTTM4R&amp;_nc_oc=AdotW8S88VFH3spn6udlqAGVBK56Diqb9sm0CXul60NuMCTqAGPlLfKO1K-AbTWWfUk&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=c7ohOEb4fp4Qk_GKaUuWnw&amp;_nc_ss=7b2a8&amp;oh=00_Af79N-o4cbLOzGQZ_9nC4LZMLlQ-pcInXieY3noSTEhLSg&amp;oe=6A0A8D97" alt="2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(15,2)"></div></div><div class="p-badge">HOT</div> <button class="c-btn prev" onclick="prevS(15)">‹</button><button class="c-btn next" onclick="nextS(15)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(15,0)"></button><button class="c-dot" onclick="gotoSlide(15,1)"></button><button class="c-dot" onclick="gotoSlide(15,2)"></button></div></div>
+      <div class="p-carousel" id="pc-15"><div class="c-track" id="ct-15"><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/700092163_122174965706892861_3885872268741139448_n.jpg?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEEL_MfC_JrpIcFxqu_CTCY9eFMSrqoeBj14UxKuqh4GI-uWYBmMjnLS5WUrzHNyNTC3gGGjtYrj1HzdkdAeNi5&amp;_nc_ohc=EnAYRbkIFUMQ7kNvwHQLQ0q&amp;_nc_oc=AdoVjSzMQXC8lhimNE5sxGojoKQh7XZMjp8DIHLbggRrOh1KBdm3s8VMivoevI1m2tM&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=ZL7revhdkq_GbW05iPq4nQ&amp;_nc_ss=7b2a8&amp;oh=00_Af5wLq1BY-v5Xy4CsBqLDXQuNopJvczZm9x2IIJ6GtiV2g&amp;oe=6A0A75E5" alt="2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(15,0)" style="opacity: 0.2;"></div><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/696802558_122174965754892861_5511697258992019484_n.jpg?_nc_cat=102&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeENYR9FRZObkSIMQhw8fQSVp404dmmAD0ynjTh2aYAPTNOeMhxNov7SHkU-unMgEPKbdv-yq4mtQiuwm8yefgEu&amp;_nc_ohc=VyV57eX6jE8Q7kNvwEDo6mZ&amp;_nc_oc=Adpz_jlol_4XUVXkT8rkQ4DXi0_s8EVDWPhBUGBSjniV5jeT8QjXOpVg_qB1VJsmOTs&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=p0lFU3Z7EDVTpxzinBX_Yw&amp;_nc_ss=7b2a8&amp;oh=00_Af5kt3T9y7Tc8mwJrNM94lGKIJZJDXlzn5irGs4kYZYpLg&amp;oe=6A0A69E3" alt="2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(15,1)" style="opacity: 0.2;"></div><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/698939369_122174965844892861_7256590256714322171_n.jpg?_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeGXXTiyJFF6px7-vBy8kJnSJEQUbVakILMkRBRtVqQgs719HvouQdw4brQcPuPFgfYM9hFdggoN6JKhv81cXADu&amp;_nc_ohc=EmhfuMIIwjsQ7kNvwHTTM4R&amp;_nc_oc=AdotW8S88VFH3spn6udlqAGVBK56Diqb9sm0CXul60NuMCTqAGPlLfKO1K-AbTWWfUk&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=c7ohOEb4fp4Qk_GKaUuWnw&amp;_nc_ss=7b2a8&amp;oh=00_Af79N-o4cbLOzGQZ_9nC4LZMLlQ-pcInXieY3noSTEhLSg&amp;oe=6A0A8D97" alt="2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(15,2)" style="opacity: 0.2;"></div></div><div class="p-badge">HOT</div> <button class="c-btn prev" onclick="prevS(15)">‹</button><button class="c-btn next" onclick="nextS(15)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(15,0)"></button><button class="c-dot" onclick="gotoSlide(15,1)"></button><button class="c-dot" onclick="gotoSlide(15,2)"></button></div></div>
       <div class="p-info">
         <div class="p-cat">cards</div>
         <div class="p-name">2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)</div>
@@ -381,7 +396,7 @@
       </div>
     </div>
     <div class="product-card">
-      <div class="p-carousel" id="pc-16"><div class="c-track" id="ct-16"><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697944214_122174967614892861_400456998925003398_n.jpg?_nc_cat=101&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeG3X2u1BGLzDW4nY_t7aScjTcX2TBNmLzJNxfZME2YvMgkifnBPzLoX8A-79Zyetwc6p9kqzv3cd_kkUWqnJqnK&amp;_nc_ohc=g6j0EageuRAQ7kNvwHyK_Bf&amp;_nc_oc=AdoAZWKWSVssiDJxBuMENtUyfCPQLj1bCNTrD9vEKDFa3xwa-_5So6Td2Rl4tpuy6uA&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=f905saXVnXledKkBvywJUA&amp;_nc_ss=7b2a8&amp;oh=00_Af7rwSU9Ovh6yySGS1pit9Ce-htfV0-eXLrL8LylBA-4oQ&amp;oe=6A0A8B46" alt="Nami - 1999 Bandai Carddass C09" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(16,0)"></div><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/698254508_122174967686892861_7717449164305560587_n.jpg?_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeE7UJ4CLa5d1H-v9jiB-gTNxzG_T128Ox3HMb9PXbw7HQrbbCSafx5xpoipsbwhD_KJaUs5wqVXWQwEcEYoR7Nk&amp;_nc_ohc=wFfRjF8HGN4Q7kNvwHRv2f8&amp;_nc_oc=AdqxCqJxm-2_m4CuF6BpU3jiicVNmIbeG2OlQLeCk1FtXePHrU3Xtdrsip_FUbSA0k8&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=zWB0AR65m37z7VMKrIkB2A&amp;_nc_ss=7b2a8&amp;oh=00_Af7uBnf_yoJUKEYpSaVE4sMVfRDWfNktzssSjR7W2pH45w&amp;oe=6A0A829B" alt="Nami - 1999 Bandai Carddass C09" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(16,1)"></div></div><div class="p-badge">1999 - CLEAN</div> <button class="c-btn prev" onclick="prevS(16)">‹</button><button class="c-btn next" onclick="nextS(16)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(16,0)"></button><button class="c-dot" onclick="gotoSlide(16,1)"></button></div></div>
+      <div class="p-carousel" id="pc-16"><div class="c-track" id="ct-16"><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697944214_122174967614892861_400456998925003398_n.jpg?_nc_cat=101&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeG3X2u1BGLzDW4nY_t7aScjTcX2TBNmLzJNxfZME2YvMgkifnBPzLoX8A-79Zyetwc6p9kqzv3cd_kkUWqnJqnK&amp;_nc_ohc=g6j0EageuRAQ7kNvwHyK_Bf&amp;_nc_oc=AdoAZWKWSVssiDJxBuMENtUyfCPQLj1bCNTrD9vEKDFa3xwa-_5So6Td2Rl4tpuy6uA&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=f905saXVnXledKkBvywJUA&amp;_nc_ss=7b2a8&amp;oh=00_Af7rwSU9Ovh6yySGS1pit9Ce-htfV0-eXLrL8LylBA-4oQ&amp;oe=6A0A8B46" alt="Nami - 1999 Bandai Carddass C09" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(16,0)" style="opacity: 0.2;"></div><div class="c-slide"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/698254508_122174967686892861_7717449164305560587_n.jpg?_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeE7UJ4CLa5d1H-v9jiB-gTNxzG_T128Ox3HMb9PXbw7HQrbbCSafx5xpoipsbwhD_KJaUs5wqVXWQwEcEYoR7Nk&amp;_nc_ohc=wFfRjF8HGN4Q7kNvwHRv2f8&amp;_nc_oc=AdqxCqJxm-2_m4CuF6BpU3jiicVNmIbeG2OlQLeCk1FtXePHrU3Xtdrsip_FUbSA0k8&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=zWB0AR65m37z7VMKrIkB2A&amp;_nc_ss=7b2a8&amp;oh=00_Af7uBnf_yoJUKEYpSaVE4sMVfRDWfNktzssSjR7W2pH45w&amp;oe=6A0A829B" alt="Nami - 1999 Bandai Carddass C09" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(16,1)" style="opacity: 0.2;"></div></div><div class="p-badge">1999 - CLEAN</div> <button class="c-btn prev" onclick="prevS(16)">‹</button><button class="c-btn next" onclick="nextS(16)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(16,0)"></button><button class="c-dot" onclick="gotoSlide(16,1)"></button></div></div>
       <div class="p-info">
         <div class="p-cat">cards</div>
         <div class="p-name">Nami - 1999 Bandai Carddass C09</div>
@@ -395,7 +410,7 @@ A beautiful relic from the very first year of the One Piece anime, this 1999 Ban
       </div>
     </div>
     <div class="product-card">
-      <div class="p-carousel" id="pc-17"><div class="c-track" id="ct-17"><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697141454_122174966546892861_6222454136936868924_n.jpg?_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeFa-qsb5XwOaxaJnQ9xOItj7zLK23Gi1HDvMsrbcaLUcNMiJLRWf_RAbTg4FrdolnLAteTId6UMC6IGHY8APuKP&amp;_nc_ohc=IcwZhY0l5Z0Q7kNvwEIslDc&amp;_nc_oc=Adp_y5TBVatZm5QX6OknoJJODDjZVT7fAOcwnXXf_GFGuVVILre9gZJjerYhzXtIGLw&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=rBzhPB9rPVcist72sXFkLg&amp;_nc_ss=7b2a8&amp;oh=00_Af6hl1855mPSEpKaK10RaDcUtAhJ2mOX95ehwNXuy5ICiA&amp;oe=6A0A7491" alt="Luffy's Hat - 1999 Bandai Carddass C05" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(17,0)"></div><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/700079002_122174966618892861_336668605379216440_n.jpg?_nc_cat=105&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeHwKEp2PvbPEi7JG4WUhRCJ8-WqIRAbBjHz5aohEBsGMXDypxUaANOQy8PoJF6zp71jSK2fENoxumjKWtIYB6R6&amp;_nc_ohc=eQ_nM4SMwv4Q7kNvwHSRAm3&amp;_nc_oc=AdojmoHMXsBfSXwByM1aULE2-oFp8VI_ibq7v5uTKVcxvuySPk5rWWSpQNe_-DlNQfs&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=JXE9NTfPnjHd6noeTYSAcg&amp;_nc_ss=7b2a8&amp;oh=00_Af5Lum-bT9QFEEdjvbw04gsia-ts_A1vwinFj8Djmx55Pg&amp;oe=6A0A78BA" alt="Luffy's Hat - 1999 Bandai Carddass C05" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(17,1)"></div><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697913049_122174966678892861_4906068622477528629_n.jpg?_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEopPZeEQDlKGC7r8rtQeZzb_dWlL6hwCZv91aUvqHAJuIr9qkaD5cNNPaTDYVmodSv1Pl9HvLoUzXX1R_UbkS0&amp;_nc_ohc=w3GK3tTnN1AQ7kNvwHPG-oO&amp;_nc_oc=AdohXwUc_pRdrkWaEwED8hcq3N9z5mFH4l6EvkLiKYy8H050cRIDRmH_A5Q9GnX7U54&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=RonxF-q0NRntjELvAqDD9Q&amp;_nc_ss=7b2a8&amp;oh=00_Af5ONZDxMYJb3NO-v6VG9KBOzhYr7Ymd812vEXTC6sUfAw&amp;oe=6A0A8EC7" alt="Luffy's Hat - 1999 Bandai Carddass C05" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(17,2)"></div></div><div class="p-badge">1999 - CLEAN</div> <button class="c-btn prev" onclick="prevS(17)">‹</button><button class="c-btn next" onclick="nextS(17)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(17,0)"></button><button class="c-dot" onclick="gotoSlide(17,1)"></button><button class="c-dot" onclick="gotoSlide(17,2)"></button></div></div>
+      <div class="p-carousel" id="pc-17"><div class="c-track" id="ct-17"><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697141454_122174966546892861_6222454136936868924_n.jpg?_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeFa-qsb5XwOaxaJnQ9xOItj7zLK23Gi1HDvMsrbcaLUcNMiJLRWf_RAbTg4FrdolnLAteTId6UMC6IGHY8APuKP&amp;_nc_ohc=IcwZhY0l5Z0Q7kNvwEIslDc&amp;_nc_oc=Adp_y5TBVatZm5QX6OknoJJODDjZVT7fAOcwnXXf_GFGuVVILre9gZJjerYhzXtIGLw&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=rBzhPB9rPVcist72sXFkLg&amp;_nc_ss=7b2a8&amp;oh=00_Af6hl1855mPSEpKaK10RaDcUtAhJ2mOX95ehwNXuy5ICiA&amp;oe=6A0A7491" alt="Luffy's Hat - 1999 Bandai Carddass C05" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(17,0)" style="opacity: 0.2;"></div><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/700079002_122174966618892861_336668605379216440_n.jpg?_nc_cat=105&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeHwKEp2PvbPEi7JG4WUhRCJ8-WqIRAbBjHz5aohEBsGMXDypxUaANOQy8PoJF6zp71jSK2fENoxumjKWtIYB6R6&amp;_nc_ohc=eQ_nM4SMwv4Q7kNvwHSRAm3&amp;_nc_oc=AdojmoHMXsBfSXwByM1aULE2-oFp8VI_ibq7v5uTKVcxvuySPk5rWWSpQNe_-DlNQfs&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=JXE9NTfPnjHd6noeTYSAcg&amp;_nc_ss=7b2a8&amp;oh=00_Af5Lum-bT9QFEEdjvbw04gsia-ts_A1vwinFj8Djmx55Pg&amp;oe=6A0A78BA" alt="Luffy's Hat - 1999 Bandai Carddass C05" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(17,1)" style="opacity: 0.2;"></div><div class="c-slide"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697913049_122174966678892861_4906068622477528629_n.jpg?_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEopPZeEQDlKGC7r8rtQeZzb_dWlL6hwCZv91aUvqHAJuIr9qkaD5cNNPaTDYVmodSv1Pl9HvLoUzXX1R_UbkS0&amp;_nc_ohc=w3GK3tTnN1AQ7kNvwHPG-oO&amp;_nc_oc=AdohXwUc_pRdrkWaEwED8hcq3N9z5mFH4l6EvkLiKYy8H050cRIDRmH_A5Q9GnX7U54&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=RonxF-q0NRntjELvAqDD9Q&amp;_nc_ss=7b2a8&amp;oh=00_Af5ONZDxMYJb3NO-v6VG9KBOzhYr7Ymd812vEXTC6sUfAw&amp;oe=6A0A8EC7" alt="Luffy's Hat - 1999 Bandai Carddass C05" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(17,2)" style="opacity: 0.2;"></div></div><div class="p-badge">1999 - CLEAN</div> <button class="c-btn prev" onclick="prevS(17)">‹</button><button class="c-btn next" onclick="nextS(17)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(17,0)"></button><button class="c-dot" onclick="gotoSlide(17,1)"></button><button class="c-dot" onclick="gotoSlide(17,2)"></button></div></div>
       <div class="p-info">
         <div class="p-cat">cards</div>
         <div class="p-name">Luffy's Hat - 1999 Bandai Carddass C05</div>
@@ -405,6 +420,18 @@ Add the most iconic item in anime history to your collection with this rare 1999
         <div class="p-bottom">
           <span class="p-price">₱24999.98</span>
           <button class="atc-btn" onclick="addToCart(17)" id="btn-17">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="p-carousel" id="pc-18"><div class="c-track" id="ct-18"><div class="c-slide"><img src="imgs/S751" alt="S75 One Piece Hyper Battles" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(18,0)" style="opacity: 0.2;"></div><div class="c-slide"><img src="imgs/S752" alt="S75 One Piece Hyper Battles" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(18,1)" style="opacity: 0.2;"></div><div class="c-slide"><img src="imgs/S753" alt="S75 One Piece Hyper Battles" loading="lazy" onerror="this.style.opacity='.2'" onclick="openLB(18,2)" style="opacity: 0.2;"></div></div><div class="p-badge">HOT</div> <button class="c-btn prev" onclick="prevS(18)">‹</button><button class="c-btn next" onclick="nextS(18)">›</button><div class="c-dots"><button class="c-dot active" onclick="gotoSlide(18,0)"></button><button class="c-dot" onclick="gotoSlide(18,1)"></button><button class="c-dot" onclick="gotoSlide(18,2)"></button></div></div>
+      <div class="p-info">
+        <div class="p-cat">cards</div>
+        <div class="p-name">S75 One Piece Hyper Battles</div>
+        <div class="p-desc">In the vintage Bandai Carddass Hyper Battle series (released around 2001), the S75 card is legendary among collectors because it is the collection's only "Hidden Holo" (often called a "Double-Layer" or "Peel" card).</div>
+        <div class="p-bottom">
+          <span class="p-price">₱50000.00</span>
+          <button class="atc-btn" onclick="addToCart(18)" id="btn-18">Add to Cart</button>
         </div>
       </div>
     </div></div>
@@ -439,7 +466,7 @@ Add the most iconic item in anime history to your collection with this rare 1999
     <h1>Get in Touch</h1>
     <p>Message us through our Facebook Page</p>
     <div class="contact-form">
-      <img src="images/contact.png">
+      <img src="https://raw.githubusercontent.com/tbtales/toyboxtales/main/images/contact.png">
       <a target="_blank" href="https://www.facebook.com/profile.php?id=61576785831757" class="sub-btn">Send Message →</a>
       
     </div>
@@ -447,9 +474,9 @@ Add the most iconic item in anime history to your collection with this rare 1999
 </div>
 
 <!-- ══ ADMIN ══ -->
-<div class="page" id="page-admin">
+<div class="page active" id="page-admin">
 
-  <div class="admin-lock" id="adminLock" style="display: flex;">
+  <div class="admin-lock" id="adminLock" style="display: none;">
     <div class="lock-card">
       <div class="lock-icon">🔐</div>
       <h2>Admin Access</h2>
@@ -461,7 +488,7 @@ Add the most iconic item in anime history to your collection with this rare 1999
     </div>
   </div>
 
-  <div class="admin-panel" id="adminPanel" style="display: none;">
+  <div class="admin-panel" id="adminPanel" style="display: block;">
     <div class="adm-wrap">
       <div class="adm-hdr">
         <h1>Product Manager</h1>
@@ -495,12 +522,12 @@ Add the most iconic item in anime history to your collection with this rare 1999
             <div class="img-url-section">
               <label>Product Images <span style="color:var(--slate);font-weight:400">(up to 3)</span></label>
               <div class="img-url-row">
-                <input type="text" id="imgUrlInput" placeholder="images/product.jpg  or  https://…" onkeydown="if(event.key==='Enter'){event.preventDefault();addImgUrl();}">
+                <input type="text" id="imgUrlInput" placeholder="filename.jpg / .png / .webp  or  https://…" onkeydown="if(event.key==='Enter'){event.preventDefault();addImgUrl();}">
                 <button class="img-add-btn" onclick="addImgUrl()" id="imgAddBtn" title="Add image">+</button>
               </div>
               <div class="img-slot-list" id="imgSlotList"></div>
               <div class="img-hint">
-                📁 Upload photos to <code>images/</code> folder in your GitHub repo, then type e.g. <code>images/toy1.jpg</code><br>
+                📁 Upload photos to <code>images/</code> folder in your GitHub repo, then type e.g. <code>https://raw.githubusercontent.com/tbtales/toyboxtales/main/images/toy1.jpg</code><br>
                 🌐 Or paste any full URL e.g. <code>https://i.imgur.com/abc.jpg</code>
               </div>
             </div>
@@ -510,9 +537,45 @@ Add the most iconic item in anime history to your collection with this rare 1999
 
         <div class="adm-card">
           <h2>📦 All Products</h2>
-          <div id="adminList"><div class="adm-prod-item"><div class="adm-thumb"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697792696_122174965628892861_7221712593192722625_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=106&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEYc--QMj9MnrzJLlNLbrFFBJkOA2Ifi6UEmQ4DYh-LpelYH-gIlMIJbOgT6AMrU0mIjBjh9qDzu4X6FipwqTOw&amp;_nc_ohc=q71V5Ox65G4Q7kNvwGU5RT9&amp;_nc_oc=AdqQs-2kHt4vYgJKOxiR_XjloSlG66dWzlKbt7zDjOppvF5H4O8uFSzsY2LUoz9oU_I&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=8XQUCSoohVFTrgr1B9CtxQ&amp;_nc_ss=7b2a8&amp;oh=00_Af42WvgqZqDOMpSuotuAW2-tCiriXN3XDr7UcECkGlThPw&amp;oe=6A0A8150" alt="S75 One Piece Hyper Battle" onerror="this.style.opacity='.2'"></div><div class="adm-info"><div class="adm-name">S75 One Piece Hyper Battle</div><div class="adm-meta">₱75000.00 · cards · HOT · 📷 3</div></div><button class="del-btn" onclick="delProduct(13)" title="Delete">✕</button></div><div class="adm-prod-item"><div class="adm-thumb"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/689010219_122174965322892861_3828937208415816759_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeG8k853voHLp-HOmt0kPPWjMY8EpsYwH8kxjwSmxjAfyUJxc-O-MjFLTmXfycbLcT8u5sHapcxuK1ZG1mY3jDzq&amp;_nc_ohc=19067rTnCr0Q7kNvwGfr5YU&amp;_nc_oc=Adp_BNj5mmUG_fQ4h447JrpQaFupE0K3Kttsd5-yyPvrN7AQVxXBWT34Pzsykdh63gg&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=0fz_ImXT_rfQo0cxwcip4A&amp;_nc_ss=7b2a8&amp;oh=00_Af7rsekM0bYrkM99n53GwaJ9A92qQ1EppaWCVS5gti83pw&amp;oe=6A0A87FD" alt="One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001" onerror="this.style.opacity='.2'"></div><div class="adm-info"><div class="adm-name">One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001</div><div class="adm-meta">₱45000.00 · cards · HIDDEN RARE · 📷 3</div></div><button class="del-btn" onclick="delProduct(14)" title="Delete">✕</button></div><div class="adm-prod-item"><div class="adm-thumb"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/700092163_122174965706892861_3885872268741139448_n.jpg?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEEL_MfC_JrpIcFxqu_CTCY9eFMSrqoeBj14UxKuqh4GI-uWYBmMjnLS5WUrzHNyNTC3gGGjtYrj1HzdkdAeNi5&amp;_nc_ohc=EnAYRbkIFUMQ7kNvwHQLQ0q&amp;_nc_oc=AdoVjSzMQXC8lhimNE5sxGojoKQh7XZMjp8DIHLbggRrOh1KBdm3s8VMivoevI1m2tM&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=ZL7revhdkq_GbW05iPq4nQ&amp;_nc_ss=7b2a8&amp;oh=00_Af5wLq1BY-v5Xy4CsBqLDXQuNopJvczZm9x2IIJ6GtiV2g&amp;oe=6A0A75E5" alt="2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)" onerror="this.style.opacity='.2'"></div><div class="adm-info"><div class="adm-name">2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)</div><div class="adm-meta">₱50000.00 · cards · HOT · 📷 3</div></div><button class="del-btn" onclick="delProduct(15)" title="Delete">✕</button></div><div class="adm-prod-item"><div class="adm-thumb"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697944214_122174967614892861_400456998925003398_n.jpg?_nc_cat=101&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeG3X2u1BGLzDW4nY_t7aScjTcX2TBNmLzJNxfZME2YvMgkifnBPzLoX8A-79Zyetwc6p9kqzv3cd_kkUWqnJqnK&amp;_nc_ohc=g6j0EageuRAQ7kNvwHyK_Bf&amp;_nc_oc=AdoAZWKWSVssiDJxBuMENtUyfCPQLj1bCNTrD9vEKDFa3xwa-_5So6Td2Rl4tpuy6uA&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=f905saXVnXledKkBvywJUA&amp;_nc_ss=7b2a8&amp;oh=00_Af7rwSU9Ovh6yySGS1pit9Ce-htfV0-eXLrL8LylBA-4oQ&amp;oe=6A0A8B46" alt="Nami - 1999 Bandai Carddass C09" onerror="this.style.opacity='.2'"></div><div class="adm-info"><div class="adm-name">Nami - 1999 Bandai Carddass C09</div><div class="adm-meta">₱20000.00 · cards · 1999 - CLEAN · 📷 2</div></div><button class="del-btn" onclick="delProduct(16)" title="Delete">✕</button></div><div class="adm-prod-item"><div class="adm-thumb"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697141454_122174966546892861_6222454136936868924_n.jpg?_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeFa-qsb5XwOaxaJnQ9xOItj7zLK23Gi1HDvMsrbcaLUcNMiJLRWf_RAbTg4FrdolnLAteTId6UMC6IGHY8APuKP&amp;_nc_ohc=IcwZhY0l5Z0Q7kNvwEIslDc&amp;_nc_oc=Adp_y5TBVatZm5QX6OknoJJODDjZVT7fAOcwnXXf_GFGuVVILre9gZJjerYhzXtIGLw&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=rBzhPB9rPVcist72sXFkLg&amp;_nc_ss=7b2a8&amp;oh=00_Af6hl1855mPSEpKaK10RaDcUtAhJ2mOX95ehwNXuy5ICiA&amp;oe=6A0A7491" alt="Luffy's Hat - 1999 Bandai Carddass C05" onerror="this.style.opacity='.2'"></div><div class="adm-info"><div class="adm-name">Luffy's Hat - 1999 Bandai Carddass C05</div><div class="adm-meta">₱24999.98 · cards · 1999 - CLEAN · 📷 3</div></div><button class="del-btn" onclick="delProduct(17)" title="Delete">✕</button></div></div>
+          <div id="adminList"><div class="adm-prod-item"><div class="adm-thumb"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697792696_122174965628892861_7221712593192722625_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=106&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEYc--QMj9MnrzJLlNLbrFFBJkOA2Ifi6UEmQ4DYh-LpelYH-gIlMIJbOgT6AMrU0mIjBjh9qDzu4X6FipwqTOw&amp;_nc_ohc=q71V5Ox65G4Q7kNvwGU5RT9&amp;_nc_oc=AdqQs-2kHt4vYgJKOxiR_XjloSlG66dWzlKbt7zDjOppvF5H4O8uFSzsY2LUoz9oU_I&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=8XQUCSoohVFTrgr1B9CtxQ&amp;_nc_ss=7b2a8&amp;oh=00_Af42WvgqZqDOMpSuotuAW2-tCiriXN3XDr7UcECkGlThPw&amp;oe=6A0A8150" alt="S75 One Piece Hyper Battle" onerror="this.style.opacity='.2'" style="opacity: 0.2;"></div><div class="adm-info"><div class="adm-name">S75 One Piece Hyper Battle</div><div class="adm-meta">₱75000.00 · cards · HOT · 📷 3</div></div><button class="del-btn" onclick="delProduct(13)" title="Delete">✕</button></div><div class="adm-prod-item"><div class="adm-thumb"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/689010219_122174965322892861_3828937208415816759_n.jpg?stp=cp6_dst-jpg_tt6&amp;_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeG8k853voHLp-HOmt0kPPWjMY8EpsYwH8kxjwSmxjAfyUJxc-O-MjFLTmXfycbLcT8u5sHapcxuK1ZG1mY3jDzq&amp;_nc_ohc=19067rTnCr0Q7kNvwGfr5YU&amp;_nc_oc=Adp_BNj5mmUG_fQ4h447JrpQaFupE0K3Kttsd5-yyPvrN7AQVxXBWT34Pzsykdh63gg&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=0fz_ImXT_rfQo0cxwcip4A&amp;_nc_ss=7b2a8&amp;oh=00_Af7rsekM0bYrkM99n53GwaJ9A92qQ1EppaWCVS5gti83pw&amp;oe=6A0A87FD" alt="One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001" onerror="this.style.opacity='.2'" style="opacity: 0.2;"></div><div class="adm-info"><div class="adm-name">One Piece Hyper Battle Carddass S75 Luffy Pirates Going Merry Holo 2001</div><div class="adm-meta">₱45000.00 · cards · HIDDEN RARE · 📷 3</div></div><button class="del-btn" onclick="delProduct(14)" title="Delete">✕</button></div><div class="adm-prod-item"><div class="adm-thumb"><img src="https://scontent.fceb9-1.fna.fbcdn.net/v/t39.30808-6/700092163_122174965706892861_3885872268741139448_n.jpg?_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeEEL_MfC_JrpIcFxqu_CTCY9eFMSrqoeBj14UxKuqh4GI-uWYBmMjnLS5WUrzHNyNTC3gGGjtYrj1HzdkdAeNi5&amp;_nc_ohc=EnAYRbkIFUMQ7kNvwHQLQ0q&amp;_nc_oc=AdoVjSzMQXC8lhimNE5sxGojoKQh7XZMjp8DIHLbggRrOh1KBdm3s8VMivoevI1m2tM&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb9-1.fna&amp;_nc_gid=ZL7revhdkq_GbW05iPq4nQ&amp;_nc_ss=7b2a8&amp;oh=00_Af5wLq1BY-v5Xy4CsBqLDXQuNopJvczZm9x2IIJ6GtiV2g&amp;oe=6A0A75E5" alt="2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)" onerror="this.style.opacity='.2'" style="opacity: 0.2;"></div><div class="adm-info"><div class="adm-name">2001 One Piece Carddass Hyper Battle - Grand Line 1 - The Long Road Ahead H10 (Hyper/Prizm)</div><div class="adm-meta">₱50000.00 · cards · HOT · 📷 3</div></div><button class="del-btn" onclick="delProduct(15)" title="Delete">✕</button></div><div class="adm-prod-item"><div class="adm-thumb"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697944214_122174967614892861_400456998925003398_n.jpg?_nc_cat=101&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeG3X2u1BGLzDW4nY_t7aScjTcX2TBNmLzJNxfZME2YvMgkifnBPzLoX8A-79Zyetwc6p9kqzv3cd_kkUWqnJqnK&amp;_nc_ohc=g6j0EageuRAQ7kNvwHyK_Bf&amp;_nc_oc=AdoAZWKWSVssiDJxBuMENtUyfCPQLj1bCNTrD9vEKDFa3xwa-_5So6Td2Rl4tpuy6uA&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=f905saXVnXledKkBvywJUA&amp;_nc_ss=7b2a8&amp;oh=00_Af7rwSU9Ovh6yySGS1pit9Ce-htfV0-eXLrL8LylBA-4oQ&amp;oe=6A0A8B46" alt="Nami - 1999 Bandai Carddass C09" onerror="this.style.opacity='.2'" style="opacity: 0.2;"></div><div class="adm-info"><div class="adm-name">Nami - 1999 Bandai Carddass C09</div><div class="adm-meta">₱20000.00 · cards · 1999 - CLEAN · 📷 2</div></div><button class="del-btn" onclick="delProduct(16)" title="Delete">✕</button></div><div class="adm-prod-item"><div class="adm-thumb"><img src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697141454_122174966546892861_6222454136936868924_n.jpg?_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=833d8c&amp;_nc_eui2=AeFa-qsb5XwOaxaJnQ9xOItj7zLK23Gi1HDvMsrbcaLUcNMiJLRWf_RAbTg4FrdolnLAteTId6UMC6IGHY8APuKP&amp;_nc_ohc=IcwZhY0l5Z0Q7kNvwEIslDc&amp;_nc_oc=Adp_y5TBVatZm5QX6OknoJJODDjZVT7fAOcwnXXf_GFGuVVILre9gZJjerYhzXtIGLw&amp;_nc_zt=23&amp;_nc_ht=scontent.fceb3-1.fna&amp;_nc_gid=rBzhPB9rPVcist72sXFkLg&amp;_nc_ss=7b2a8&amp;oh=00_Af6hl1855mPSEpKaK10RaDcUtAhJ2mOX95ehwNXuy5ICiA&amp;oe=6A0A7491" alt="Luffy's Hat - 1999 Bandai Carddass C05" onerror="this.style.opacity='.2'" style="opacity: 0.2;"></div><div class="adm-info"><div class="adm-name">Luffy's Hat - 1999 Bandai Carddass C05</div><div class="adm-meta">₱24999.98 · cards · 1999 - CLEAN · 📷 3</div></div><button class="del-btn" onclick="delProduct(17)" title="Delete">✕</button></div><div class="adm-prod-item"><div class="adm-thumb"><img src="imgs/S751" alt="S75 One Piece Hyper Battles" onerror="this.style.opacity='.2'" style="opacity: 0.2;"></div><div class="adm-info"><div class="adm-name">S75 One Piece Hyper Battles</div><div class="adm-meta">₱50000.00 · cards · HOT · 📷 3</div></div><button class="del-btn" onclick="delProduct(18)" title="Delete">✕</button></div></div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EDIT PRODUCT MODAL ══ -->
+<div class="edit-modal-overlay" id="editModalOverlay" onclick="closeEditModal(event)">
+  <div class="edit-modal" id="editModal">
+    <h2>✏️ Edit Product</h2>
+    <div class="adm-form">
+      <input type="hidden" id="eId">
+      <input type="text" placeholder="Product name" id="eName">
+      <input type="number" placeholder="Price (₱)" id="ePrice" min="0" step="0.01">
+      <select id="eCategory">
+        <option value="toys">🧸 Toys</option>
+        <option value="cards">🃏 Cards</option>
+        <option value="educational">📚 Educational</option>
+      </select>
+      <input type="text" placeholder="Emoji icon (e.g. 🚂)" id="eEmoji">
+      <input type="text" placeholder="Badge label (e.g. NEW, SALE)" id="eBadge">
+      <textarea placeholder="Short description" id="eDesc" style="resize:vertical;min-height:70px"></textarea>
+      <div class="img-url-section">
+        <label>Product Images <span style="color:var(--slate);font-weight:400">(up to 3)</span></label>
+        <div class="img-url-row">
+          <input type="text" id="eImgUrlInput" placeholder="filename.jpg / .png / .webp  or  https://…" onkeydown="if(event.key==='Enter'){event.preventDefault();addEditImgUrl();}">
+          <button class="img-add-btn" onclick="addEditImgUrl()" id="eImgAddBtn" title="Add image">+</button>
+        </div>
+        <div class="img-slot-list" id="eImgSlotList"></div>
+        <div class="img-hint">
+          📁 Type a filename with extension (e.g. <code>toy1.jpg</code>) to use <code>https://raw.githubusercontent.com/tbtales/toyboxtales/main/images/</code> automatically.<br>
+          🌐 Or paste any full URL e.g. <code>https://i.imgur.com/abc.jpg</code>
+        </div>
+      </div>
+    </div>
+    <div class="edit-modal-footer">
+      <button class="edit-cancel-btn" onclick="closeEditModal()">Cancel</button>
+      <button class="edit-save-btn" onclick="saveEditProduct()">💾 Save Changes</button>
     </div>
   </div>
 </div>
@@ -608,6 +671,20 @@ const SEED_PRODUCTS = [
       "https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/700079002_122174966618892861_336668605379216440_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHwKEp2PvbPEi7JG4WUhRCJ8-WqIRAbBjHz5aohEBsGMXDypxUaANOQy8PoJF6zp71jSK2fENoxumjKWtIYB6R6&_nc_ohc=eQ_nM4SMwv4Q7kNvwHSRAm3&_nc_oc=AdojmoHMXsBfSXwByM1aULE2-oFp8VI_ibq7v5uTKVcxvuySPk5rWWSpQNe_-DlNQfs&_nc_zt=23&_nc_ht=scontent.fceb3-1.fna&_nc_gid=JXE9NTfPnjHd6noeTYSAcg&_nc_ss=7b2a8&oh=00_Af5Lum-bT9QFEEdjvbw04gsia-ts_A1vwinFj8Djmx55Pg&oe=6A0A78BA",
       "https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/697913049_122174966678892861_4906068622477528629_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEopPZeEQDlKGC7r8rtQeZzb_dWlL6hwCZv91aUvqHAJuIr9qkaD5cNNPaTDYVmodSv1Pl9HvLoUzXX1R_UbkS0&_nc_ohc=w3GK3tTnN1AQ7kNvwHPG-oO&_nc_oc=AdohXwUc_pRdrkWaEwED8hcq3N9z5mFH4l6EvkLiKYy8H050cRIDRmH_A5Q9GnX7U54&_nc_zt=23&_nc_ht=scontent.fceb3-1.fna&_nc_gid=RonxF-q0NRntjELvAqDD9Q&_nc_ss=7b2a8&oh=00_Af5ONZDxMYJb3NO-v6VG9KBOzhYr7Ymd812vEXTC6sUfAw&oe=6A0A8EC7"
     ]
+  },
+  {
+    "id": 18,
+    "name": "S75 One Piece Hyper Battles",
+    "price": 50000,
+    "category": "cards",
+    "emoji": "📦",
+    "badge": "HOT",
+    "desc": "In the vintage Bandai Carddass Hyper Battle series (released around 2001), the S75 card is legendary among collectors because it is the collection's only \"Hidden Holo\" (often called a \"Double-Layer\" or \"Peel\" card).",
+    "images": [
+      "imgs/S751",
+      "imgs/S752",
+      "imgs/S753"
+    ]
   }
 ];
 // WONDERNEST_PRODUCTS_END
@@ -662,11 +739,32 @@ function doLogin() {
 function doLogout() { adminUnlocked=false; refreshAdminView(); showToast('🔒 Logged out.'); }
 
 // ── IMAGE URL ─────────────────────────────────────────────
+const GITHUB_BASE = 'https://raw.githubusercontent.com/tbtales/toyboxtales/main/images/';
+const VALID_EXTS  = ['.jpg','.jpeg','.png','.webp','.gif','.avif'];
+
+function resolveImgUrl(raw) {
+  const trimmed = raw.trim();
+  if (!trimmed) return '';
+  // Already a full URL
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  // Local path like imgs/foo.jpg or images/foo.jpg — strip folder prefix
+  const filename = trimmed.replace(/^(imgs?\/|images?\/)/i, '');
+  return GITHUB_BASE + filename;
+}
+function hasValidExt(raw) {
+  const trimmed = raw.trim();
+  // For full URLs, check the path portion before any query string
+  const path = trimmed.split('?')[0].toLowerCase();
+  return VALID_EXTS.some(ext => path.endsWith(ext));
+}
+
 function addImgUrl() {
   if (pendingUrls.length>=3){showToast('⚠️ Max 3 images per product.');return;}
   const inp=document.getElementById('imgUrlInput');
-  const url=inp.value.trim();
-  if (!url){inp.classList.add('err');setTimeout(()=>inp.classList.remove('err'),1000);return;}
+  const raw=inp.value.trim();
+  if (!raw){inp.classList.add('err');setTimeout(()=>inp.classList.remove('err'),1000);return;}
+  if (!hasValidExt(raw)){showToast('⚠️ Image must end in .jpg .jpeg .png .webp .gif or .avif');inp.classList.add('err');setTimeout(()=>inp.classList.remove('err'),1500);return;}
+  const url = resolveImgUrl(raw);
   pendingUrls.push(url); inp.value='';
   renderImgSlots(); updateAddBtn();
 }
@@ -775,8 +873,71 @@ function renderAdminList(){
   el.innerHTML=products.map(p=>{
     const thumb=p.images&&p.images.length?`<div class="adm-thumb"><img src="${p.images[0]}" alt="${p.name}" onerror="this.style.opacity='.2'"></div>`:`<div class="adm-thumb">${p.emoji||'📦'}</div>`;
     const imgTag=p.images&&p.images.length?` · 📷 ${p.images.length}`:'';
-    return `<div class="adm-prod-item">${thumb}<div class="adm-info"><div class="adm-name">${p.name}</div><div class="adm-meta">₱${p.price.toFixed(2)} · ${p.category}${p.badge?' · '+p.badge:''}${imgTag}</div></div><button class="del-btn" onclick="delProduct(${p.id})" title="Delete">✕</button></div>`;
+    return `<div class="adm-prod-item">${thumb}<div class="adm-info"><div class="adm-name">${p.name}</div><div class="adm-meta">₱${p.price.toFixed(2)} · ${p.category}${p.badge?' · '+p.badge:''}${imgTag}</div></div><div class="adm-prod-actions"><button class="edit-btn" onclick="openEditModal(${p.id})" title="Edit">✏️</button><button class="del-btn" onclick="delProduct(${p.id})" title="Delete">✕</button></div></div>`;
   }).join('');
+}
+
+// ── EDIT MODAL ────────────────────────────────────────────
+let editUrls = [];
+
+function openEditModal(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  editUrls = [...(p.images || [])];
+  document.getElementById('eId').value    = id;
+  document.getElementById('eName').value  = p.name;
+  document.getElementById('ePrice').value = p.price;
+  document.getElementById('eCategory').value = p.category;
+  document.getElementById('eEmoji').value = p.emoji || '';
+  document.getElementById('eBadge').value = p.badge || '';
+  document.getElementById('eDesc').value  = p.desc  || '';
+  document.getElementById('eImgUrlInput').value = '';
+  renderEditImgSlots(); updateEditAddBtn();
+  document.getElementById('editModalOverlay').classList.add('open');
+}
+function closeEditModal(e) {
+  if (e && e.target !== document.getElementById('editModalOverlay')) return;
+  document.getElementById('editModalOverlay').classList.remove('open');
+}
+function addEditImgUrl() {
+  if (editUrls.length >= 3) { showToast('⚠️ Max 3 images per product.'); return; }
+  const inp = document.getElementById('eImgUrlInput');
+  const raw = inp.value.trim();
+  if (!raw) { inp.classList.add('err'); setTimeout(() => inp.classList.remove('err'), 1000); return; }
+  if (!hasValidExt(raw)) { showToast('⚠️ Image must end in .jpg .jpeg .png .webp .gif or .avif'); inp.classList.add('err'); setTimeout(() => inp.classList.remove('err'), 1500); return; }
+  const url = resolveImgUrl(raw);
+  editUrls.push(url); inp.value = '';
+  renderEditImgSlots(); updateEditAddBtn();
+}
+function removeEditImgUrl(i) { editUrls.splice(i, 1); renderEditImgSlots(); updateEditAddBtn(); }
+function updateEditAddBtn() { document.getElementById('eImgAddBtn').disabled = editUrls.length >= 3; }
+function renderEditImgSlots() {
+  document.getElementById('eImgSlotList').innerHTML = editUrls.map((url, i) => `
+    <div class="img-slot">
+      <img class="img-slot-thumb" src="${url}" alt="img" onerror="this.style.opacity='.3'">
+      <span class="img-slot-url" title="${url}">${url}</span>
+      <button class="img-slot-del" onclick="removeEditImgUrl(${i})">✕</button>
+    </div>`).join('');
+}
+function saveEditProduct() {
+  const id    = parseInt(document.getElementById('eId').value);
+  const name  = document.getElementById('eName').value.trim();
+  const price = parseFloat(document.getElementById('ePrice').value);
+  const cat   = document.getElementById('eCategory').value;
+  const emoji = document.getElementById('eEmoji').value.trim() || '📦';
+  const badge = document.getElementById('eBadge').value.trim().toUpperCase();
+  const desc  = document.getElementById('eDesc').value.trim();
+  if (!name || isNaN(price) || price < 0) { showToast('⚠️ Name and valid price required.'); return; }
+  const idx = products.findIndex(x => x.id === id);
+  if (idx === -1) return;
+  products[idx] = { ...products[idx], name, price, category: cat, emoji, badge, desc, images: [...editUrls] };
+  saveProducts(); renderProducts('all'); renderAdminList();
+  // Update cart if item is in it
+  const ci = cart.findIndex(x => x.id === id);
+  if (ci !== -1) cart[ci] = { ...products[idx], qty: cart[ci].qty };
+  updateCartUI();
+  document.getElementById('editModalOverlay').classList.remove('open');
+  showToast('✅ Product updated! Remember to Export & upload to GitHub.');
 }
 
 // ── EXPORT HTML ───────────────────────────────────────────
